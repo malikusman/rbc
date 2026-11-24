@@ -28,7 +28,9 @@ export function SiteHeader() {
     window.addEventListener("scroll", h, { passive: true });
     return () => window.removeEventListener("scroll", h);
   }, []);
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header className={cn("sticky top-0 z-40 transition-[background,box-shadow,border-color] duration-300", scrolled ? "border-b border-hair bg-paper/85 backdrop-blur-xl" : "border-b border-transparent bg-paper")}>
@@ -160,7 +162,9 @@ export function SiteFooter() {
 export function SiteFrame({ children }: { children: ReactNode }) {
   const mounted = useMounted();
   const pathname = usePathname();
-  useEffect(() => window.scrollTo({ top: 0 }), [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [pathname]);
   return (
     <div className="min-h-screen bg-paper">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">

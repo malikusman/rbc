@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, animate, motion, useInView, useMotionValue, useTransform } from "motion/react";
-import { forwardRef, useEffect, useMemo, useRef, useState, type ComponentProps, type ReactNode } from "react";
+import { forwardRef, useEffect, useId, useMemo, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import QRCode from "qrcode";
 import { X, CheckCircle2, Info, AlertTriangle } from "lucide-react";
 import { cn, initials } from "@/lib/utils";
@@ -287,7 +287,7 @@ export function Sparkline({ data, color = "#14213A", width = 96, height = 32, fi
   const min = Math.min(...data, 0);
   const pts = data.map((v, i) => [(i / (data.length - 1)) * width, height - 2 - ((v - min) / (max - min || 1)) * (height - 4)] as const);
   const d = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
-  const id = useMemo(() => `sg${Math.random().toString(36).slice(2, 7)}`, []);
+  const id = `sg${useId().replace(/:/g, "")}`;
   return (
     <svg width={width} height={height} className="overflow-visible">
       <defs>
@@ -537,7 +537,7 @@ export function EventArt({
   overlay?: "bottom" | "full" | "none";
 }) {
   const a = ART[art] ?? ART.dusk;
-  const gid = useMemo(() => `ea${Math.random().toString(36).slice(2, 7)}`, []);
+  const gid = `ea${useId().replace(/:/g, "")}`;
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const p = photo ? PHOTOS[photo] : undefined;
@@ -589,7 +589,9 @@ export function Kbd({ children }: { children: ReactNode }) {
 
 export function useMounted() {
   const [m, setM] = useState(false);
-  useEffect(() => setM(true), []);
+  useEffect(() => {
+    setM(true);
+  }, []);
   return m;
 }
 
