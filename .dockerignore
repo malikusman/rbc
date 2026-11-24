@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.git
+*.zip
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+.DS_Store
+Dockerfile
+docker-compose.yml
+.dockerignore

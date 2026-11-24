@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* BCC RAK Design System v1.0 tokens, extended for the platform */
+@theme {
+  --color-navy: #14213a;
+  --color-navy-2: #2b3a57;
+  --color-navy-3: #44536f;
+  --color-red: #b8322a;
+  --color-red-h: #962720;
+  --color-copper: #b5713e;
+  --color-copper-soft: #f6ece3;
+  --color-copper-ink: #8c5a2e;
+  --color-paper: #f8f6f1;
+  --color-stone: #ece8df;
+  --color-line: #d8d2c6;
+  --color-hair: #e9e5dc;
+  --color-muted: #5b6475;
+  --color-faint: #636b7c;
+  --color-ok: #2f7a55;
+  --color-ok-soft: #e7f2ec;
+  --color-warn: #8c5714;
+  --color-warn-soft: #fbf1e2;
+  --color-bad: #b8322a;
+  --color-bad-soft: #f8e9e7;
+  --color-info: #2b5ea8;
+  --color-info-soft: #e8eff9;
+
+  --font-serif: "Newsreader Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Hanken Grotesk Variable", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --shadow-card: 0 1px 2px rgba(20, 33, 58, 0.04), 0 0 0 1px rgba(20, 33, 58, 0.02);
+  --shadow-lift: 0 12px 32px -12px rgba(20, 33, 58, 0.18), 0 2px 6px rgba(20, 33, 58, 0.05);
+  --shadow-pop: 0 24px 60px -20px rgba(20, 33, 58, 0.35), 0 4px 12px rgba(20, 33, 58, 0.08);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: rgba(184, 50, 42, 0.16);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-faint);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hairline {
+    border-color: var(--color-hair);
+  }
+  .grain {
+    background-image: radial-gradient(rgba(20, 33, 58, 0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
