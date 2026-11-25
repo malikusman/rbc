@@ -24,6 +24,7 @@ import {
   type ThreadMessage,
 } from "./data";
 import { rel, uid } from "./utils";
+import { SEED_DOCS, factsFor, guessKind, type KnowledgeDoc } from "./knowledge";
 
 export type Ticket = {
   id: string;
@@ -49,6 +50,8 @@ export type NewApplication = {
 };
 
 type State = {
+  documents: KnowledgeDoc[];
+  addDocument: (d: { name: string; size: string; owner: KnowledgeDoc["owner"]; by: string }) => string;
   companies: Company[];
   sponsors: (Sponsor & { source?: "Website" | "Admin"; contact?: string; email?: string; note?: string })[];
   invoices: (Invoice & { pending?: PendingTicket })[];
@@ -93,6 +96,7 @@ const initialTickets: Ticket[] = [
 ];
 
 const initial = () => ({
+  documents: SEED_DOCS.map((d) => ({ ...d })),
   companies: COMPANIES.map((c) => ({ ...c })),
   sponsors: SPONSORS.map((x) => ({ ...x })) as State["sponsors"],
   invoices: INVOICES.map((i) => ({ ...i })),
@@ -117,6 +121,38 @@ export const useStore = create<State>()(
   persist(
     (set, get) => ({
       ...initial(),
+
+      addDocument: (d) => {
+        const id = uid("doc");
+        const kind = guessKind(d.name);
+        const meta = factsFor(kind, d.owner.name);
+        const doc: KnowledgeDoc = {
+          id,
+          name: d.name,
+          kind,
+          owner: d.owner,
+          size: d.size,
+          pages: Math.max(1, Math.round(Math.random() * 8)),
+          uploaded: new Date().toISOString(),
+          uploadedBy: d.by,
+          status: "Uploading",
+          progress: 8,
+          summary: meta.summary,
+          facts: meta.facts,
+          text: `${d.name} ${d.owner.name} ${kind} ${meta.summary}`.toLowerCase(),
+        };
+        set((s) => ({ documents: [doc, ...s.documents] }));
+        const steps: [KnowledgeDoc["status"], number, number][] = [
+          ["Uploading", 35, 500],
+          ["Reading", 55, 1300],
+          ["Extracting", 80, 2300],
+          ["Indexed", 100, 3400],
+        ];
+        steps.forEach(([status, progress, at]) =>
+          setTimeout(() => set((s) => ({ documents: s.documents.map((x) => (x.id === id ? { ...x, status, progress } : x)) })), at),
+        );
+        return id;
+      },
 
       addApplication: (a) => {
         const id = uid("ap");
@@ -273,7 +309,7 @@ export const useStore = create<State>()(
     }),
     {
       name: "bcc-rak-demo",
-      version: 3,
+      version: 4,
       // When the demo data changes shape, start from fresh seed data instead of a stale copy.
       migrate: () => initial() as unknown as State,
       storage: createJSONStorage(() => localStorage),

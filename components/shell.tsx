@@ -32,15 +32,17 @@ import {
   Wand2,
   ArrowRight,
   LogOut,
+  BookOpen,
 } from "lucide-react";
 import { cn, rel, relLabel } from "@/lib/utils";
 import { Avatar, Crest, Kbd, Logo, Toaster, useMounted } from "./ui";
+import { LanaLauncher, LanaMark, LanaPill, useLanaUI } from "./lana";
 import { useStore } from "@/lib/store";
 import { EVENTS, ME_MEMBER, ME_SPONSOR, NOTIFICATIONS, PEOPLE, STAFF } from "@/lib/data";
 
 export type Portal = "member" | "sponsor" | "admin";
 
-type NavItem = { href: string; label: string; icon: typeof LayoutGrid; badge?: string; live?: "applications" | "kyc" };
+type NavItem = { href: string; label: string; icon: typeof LayoutGrid; badge?: string; live?: "applications" | "kyc"; lana?: boolean };
 type NavGroup = { label?: string; items: NavItem[] };
 
 const NAV: Record<Portal, NavGroup[]> = {
@@ -73,6 +75,7 @@ const NAV: Record<Portal, NavGroup[]> = {
       label: "Overview",
       items: [
         { href: "/admin", label: "Dashboard", icon: LayoutGrid },
+        { href: "/admin/lana", label: "Ask Lana", icon: LayoutGrid, lana: true },
         { href: "/admin/calendar", label: "Calendar", icon: CalendarRange },
       ],
     },
@@ -102,6 +105,7 @@ const NAV: Record<Portal, NavGroup[]> = {
     {
       label: "System",
       items: [
+        { href: "/admin/lana/knowledge", label: "Knowledge base", icon: BookOpen },
         { href: "/admin/integrations", label: "Integrations", icon: Plug },
         { href: "/admin/settings", label: "Settings", icon: Settings },
       ],
@@ -116,7 +120,7 @@ const PORTAL_META: Record<Portal, { label: string; user: { name: string; sub: st
 };
 
 function isActive(pathname: string, href: string) {
-  if (href === "/member" || href === "/sponsor" || href === "/admin") return pathname === href;
+  if (href === "/member" || href === "/sponsor" || href === "/admin" || href === "/admin/lana") return pathname === href;
   return pathname === href || pathname.startsWith(href + "/");
 }
 
@@ -225,8 +229,9 @@ function Sidebar({ portal, onNavigate }: { portal: Portal; onNavigate?: () => vo
                         />
                       )}
                       {active && <span className="absolute top-2 bottom-2 left-0 w-[3px] rounded-full bg-red" />}
-                      <Icon size={16} strokeWidth={active ? 2 : 1.6} className="relative z-10 shrink-0" />
+                      {it.lana ? <LanaMark size={18} className="relative z-10 mx-[-1px]" /> : <Icon size={16} strokeWidth={active ? 2 : 1.6} className="relative z-10 shrink-0" />}
                       <span className="relative z-10 flex-1 truncate">{it.label}</span>
+                      {it.lana && !active && <LanaPill className="relative z-10 !px-1.5">AI</LanaPill>}
                       {badge && (
                         <span className={cn("relative z-10 rounded-full px-1.5 text-[11px] font-semibold tabular", active ? "bg-navy text-white" : "bg-stone text-navy-2")}>{badge}</span>
                       )}
@@ -450,6 +455,7 @@ function TopBar({ portal, onMenu, onSearch }: { portal: Portal; onMenu: () => vo
           >
             Public website <ExternalLink size={13} />
           </Link>
+          {portal === "admin" && <TopLanaButton />}
           <Notifications portal={portal} />
         </div>
       </div>
@@ -470,6 +476,10 @@ export function Shell({ portal, children }: { portal: Portal; children: ReactNod
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setCmd((v) => !v);
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "j") {
+        e.preventDefault();
+        useLanaUI.getState().setOpen(!useLanaUI.getState().open);
       }
     };
     window.addEventListener("keydown", h);
@@ -520,6 +530,9 @@ export function Shell({ portal, children }: { portal: Portal; children: ReactNod
       </div>
 
       {portal === "member" && <MobileTabBar />}
+      {!(portal === "admin" && pathname === "/admin/lana") && (
+        <LanaLauncher ctx={portal} className={portal === "member" ? "bottom-20 lg:bottom-6" : undefined} />
+      )}
       <CommandPalette open={cmd} onClose={() => setCmd(false)} portal={portal} />
       <Toaster />
     </div>
@@ -546,5 +559,18 @@ function MobileTabBar() {
         })}
       </ul>
     </nav>
+  );
+}
+
+function TopLanaButton() {
+  const setOpen = useLanaUI((s) => s.setOpen);
+  return (
+    <button onClick={() => setOpen(true)} className="hidden h-9 items-center gap-2 rounded-xl border border-hair bg-white px-3 text-[13px] font-medium text-navy shadow-[var(--shadow-card)] transition hover:border-[#8A7BE8] md:inline-flex">
+      <LanaMark size={18} /> Ask Lana
+      <span className="hidden items-center gap-0.5 lg:flex">
+        <Kbd>⌘</Kbd>
+        <Kbd>J</Kbd>
+      </span>
+    </button>
   );
 }

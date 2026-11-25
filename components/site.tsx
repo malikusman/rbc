@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, Menu, X, Mail, MapPin, Phone } from "lucide-react";
 import { Button, EventArt, Logo, Toaster, useMounted } from "./ui";
+import { LanaHeaderButton, LanaLauncher } from "./lana";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 
@@ -56,6 +57,7 @@ export function SiteHeader() {
           <Button variant="primary" href="/join" size="md">
             Join the Chamber
           </Button>
+          <LanaHeaderButton />
         </div>
         <button onClick={() => setOpen((v) => !v)} className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl text-navy hover:bg-stone lg:hidden" aria-label={open ? "Close menu" : "Open menu"}>
           {open ? <X size={20} /> : <Menu size={20} />}
@@ -173,6 +175,7 @@ export function SiteFrame({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main id="main">{mounted ? <motion.div key={pathname} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>{children}</motion.div> : <div className="min-h-[70vh]" />}</main>
       <SiteFooter />
+      <LanaLauncher ctx="public" nudge="Hi, I’m Lana. Ask me about membership, events or partnering with the Chamber." />
       <Toaster />
     </div>
   );

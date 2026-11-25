@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, CreditCard, FileText, Mail, MessageCircle, StickyNote, Ticket, UserPlus, Phone, ShieldCheck } from "lucide-react";
 import { Avatar, Badge, Button, Card, CardHeader, ProgressRing, Segmented, Textarea, statusTone } from "@/components/ui";
 import { InvoiceSheet } from "@/components/invoice";
+import { LanaMark } from "@/components/lana";
 import { EVENTS, PEOPLE, STAFF, invoiceTotal, tierById, type Invoice } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { aed, cn, daysFromNow, fmtDate, rel, relLabel } from "@/lib/utils";
@@ -17,6 +18,7 @@ export default function CompanyRecord() {
   const { id } = useParams<{ id: string }>();
   const c = useStore((s) => s.companies.find((x) => x.id === id));
   const sponsors = useStore((s) => s.sponsors);
+  const allDocs = useStore((s) => s.documents);
   const allInvoices = useStore((s) => s.invoices);
   const toast = useStore((s) => s.toast);
   const [tab, setTab] = useState<"timeline" | "invoices" | "people">("timeline");
@@ -26,6 +28,8 @@ export default function CompanyRecord() {
 
   if (!c) return <div className="text-muted">Company not found.</div>;
   const people = PEOPLE.filter((p) => p.companyId === c.id);
+  const sponsorRec = sponsors.find((x) => x.name === c.name);
+  const docs = allDocs.filter((d) => d.owner.id === c.id || (sponsorRec && d.owner.id === sponsorRec.id) || d.owner.name === c.name);
   const invoices = allInvoices.filter((i) => i.companyId === c.id);
   const sponsor = sponsors.find((s) => s.name === c.name);
   const tier = tierById(c.tier);
@@ -120,6 +124,18 @@ export default function CompanyRecord() {
                 </div>
               ))}
             </dl>
+          </Card>
+          <Card>
+            <CardHeader title="Documents" sub="Read by Lana" action={<LanaMark size={20} />} />
+            <div className="space-y-2.5 px-6 pb-6">
+              {docs.length === 0 && <div className="text-[13px] text-muted">No documents yet.</div>}
+              {docs.map((d) => (
+                <Link key={d.id} href="/admin/lana/knowledge" className="block rounded-xl border border-hair p-3 transition hover:bg-paper/60">
+                  <div className="truncate text-[13px] font-medium text-navy">{d.name}</div>
+                  <div className="mt-0.5 text-[11.5px] text-faint">{d.facts.slice(0, 2).map((f) => `${f.label}: ${f.value}`).join(" · ")}</div>
+                </Link>
+              ))}
+            </div>
           </Card>
           {sponsor && (
             <Card className="p-6">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Avatar, Button, Card, CardHeader, Field, Input, PageHeader, Select, Toggle } from "@/components/ui";
 import { ME_MEMBER } from "@/lib/data";
+import { DocUpload } from "@/components/doc-upload";
 import { useStore } from "@/lib/store";
 
 const CHANNELS = ["Email", "Push", "WhatsApp"] as const;
@@ -99,6 +100,13 @@ export default function Settings() {
                   </Row>
                 ))}
               </div>
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Company documents" sub="Trade licence, VAT certificate and similar. Lana reads them and keeps your company details up to date." />
+            <div className="px-6 pb-6">
+              <DocUpload owner={{ type: "member", id: "c1", name: "Thames & Hajar Engineering" }} by={ME_MEMBER.name} hint="PDF or image · we’ll update your record automatically" compact />
             </div>
           </Card>
 

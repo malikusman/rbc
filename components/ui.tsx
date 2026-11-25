@@ -436,7 +436,7 @@ export function Toaster() {
   const toasts = useStore((s) => s.toasts);
   const dismiss = useStore((s) => s.dismiss);
   return (
-    <div className="pointer-events-none fixed right-5 bottom-24 z-[60] lg:bottom-5 flex w-[360px] max-w-[calc(100vw-40px)] flex-col gap-2">
+    <div className="pointer-events-none fixed right-5 bottom-24 z-[60] flex w-[360px] max-w-[calc(100vw-40px)] flex-col gap-2">
       <AnimatePresence initial={false}>
         {toasts.map((t) => {
           const Icon = t.tone === "warn" ? AlertTriangle : t.tone === "info" ? Info : CheckCircle2;

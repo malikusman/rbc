@@ -10,6 +10,9 @@ import { EVENTS, TIERS } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { aed, daysFromNow, fmtDate } from "@/lib/utils";
 import { ARTICLES } from "@/lib/content";
+import { LanaOrb, LANA_GRADIENT, useLanaUI } from "@/components/lana";
+import { suggestionsFor } from "@/lib/lana";
+import { useState } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -239,6 +242,11 @@ export default function Home() {
         </div>
       </Container>
 
+      {/* Ask Lana */}
+      <Container className="mt-28">
+        <AskLanaBand />
+      </Container>
+
       {/* CTA */}
       <Container className="mt-28">
         <div className="grid items-center gap-8 rounded-[32px] bg-stone/70 p-8 md:p-14 lg:grid-cols-[1.4fr_1fr]">
@@ -258,5 +266,41 @@ export default function Home() {
         </div>
       </Container>
     </>
+  );
+}
+
+function AskLanaBand() {
+  const setOpen = useLanaUI((s) => s.setOpen);
+  const [q, setQ] = useState("");
+  return (
+    <div className="relative overflow-hidden rounded-[32px] border border-hair bg-white p-8 md:p-14">
+      <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full opacity-20 blur-3xl" style={{ background: LANA_GRADIENT }} />
+      <div className="relative grid items-center gap-10 lg:grid-cols-[auto_1fr]">
+        <LanaOrb size={120} />
+        <div>
+          <h2 className="font-display text-[34px] leading-tight text-navy md:text-[44px]">Have a question? Ask Lana.</h2>
+          <p className="mt-2 max-w-xl text-[16px] text-muted">Membership, events, partnerships or moving your business to Ras Al Khaimah — type or just ask out loud.</p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (q.trim()) setOpen(true, q.trim());
+              setQ("");
+            }}
+            className="mt-6 flex max-w-xl gap-2 rounded-2xl border border-line bg-white p-1.5 focus-within:border-[#8A7BE8]"
+          >
+            <label htmlFor="home-lana" className="sr-only">Ask Lana</label>
+            <input id="home-lana" value={q} onChange={(e) => setQ(e.target.value)} placeholder="e.g. How much is Business membership?" className="h-11 flex-1 bg-transparent px-3 text-[15px] text-navy outline-none placeholder:text-faint" />
+            <Button variant="dark" type="submit">Ask</Button>
+          </form>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {suggestionsFor("public").slice(0, 4).map((s) => (
+              <button key={s} onClick={() => setOpen(true, s)} className="rounded-full border border-hair bg-paper/60 px-3.5 py-1.5 text-[13px] text-navy-2 transition hover:border-[#8A7BE8]">
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

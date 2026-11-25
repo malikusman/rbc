@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, Download, UploadCloud, FileSignature, Image as ImageIcon } from "lucide-react";
+import { FileText, Download, FileSignature, Image as ImageIcon } from "lucide-react";
 import { Badge, Card, CardHeader, PageHeader, statusTone } from "@/components/ui";
 import { InvoiceSheet } from "@/components/invoice";
+import { DocUpload } from "@/components/doc-upload";
 import { invoiceTotal, type Invoice } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { aed, fmtDate } from "@/lib/utils";
@@ -19,7 +20,6 @@ export default function Documents() {
   const invoices = useStore((s) => s.invoices).filter((i) => i.companyId === "c13");
   const toast = useStore((s) => s.toast);
   const [open, setOpen] = useState<Invoice | null>(null);
-  const [drag, setDrag] = useState(false);
 
   return (
     <div>
@@ -45,23 +45,7 @@ export default function Documents() {
             ))}
           </div>
           <div className="p-6">
-            <div
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDrag(true);
-              }}
-              onDragLeave={() => setDrag(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setDrag(false);
-                toast({ title: "File uploaded", body: "Omar has been notified." });
-              }}
-              className={`flex flex-col items-center rounded-2xl border-2 border-dashed px-6 py-8 text-center transition ${drag ? "border-navy bg-paper" : "border-line"}`}
-            >
-              <UploadCloud size={22} className="text-faint" />
-              <div className="mt-2 text-[14px] font-medium text-navy">Drop brand assets here</div>
-              <div className="text-[12px] text-faint">Logos, guidelines or event artwork · up to 50 MB</div>
-            </div>
+            <DocUpload owner={{ type: "sponsor", id: "s1", name: "Meridian Bank RAK" }} by="James Okafor" hint="Logos, brand guidelines, event artwork or signed documents" />
           </div>
         </Card>
 
