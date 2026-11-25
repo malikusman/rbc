@@ -309,7 +309,7 @@ export const useStore = create<State>()(
     }),
     {
       name: "bcc-rak-demo",
-      version: 4,
+      version: 5,
       // When the demo data changes shape, start from fresh seed data instead of a stale copy.
       migrate: () => initial() as unknown as State,
       storage: createJSONStorage(() => localStorage),
