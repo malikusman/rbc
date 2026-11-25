@@ -219,7 +219,7 @@ export const TIERS: Tier[] = [
 export const tierById = (id?: TierId) => TIERS.find((t) => t.id === id);
 
 export const STAFF = {
-  admin: { name: "Eleanor Grant", role: "Executive Director", email: "eleanor@britishchamberrak.net" },
+  admin: { name: "Brooke Grant", role: "Executive Director", email: "brooke@britishchamberrak.net" },
   rm: { name: "Omar Al Shehhi", role: "Partnerships Manager", email: "omar@britishchamberrak.net", phone: "+971 7 204 1180" },
   membership: { name: "Priya Nair", role: "Membership Manager" },
   finance: { name: "Daniel Hughes", role: "Finance Lead" },
@@ -248,7 +248,7 @@ export const ME_SPONSOR = {
 export const COMPANIES: Company[] = [
   { id: "c1", name: "Thames & Hajar Engineering", sector: "Engineering", emirate: "RAK Mainland", licence: "RAK-DED 48213", trn: "100 2213 8841 00003", tier: "business", founding: true, status: "Active", since: rel(-64), renews: rel(301), contacts: 3, quality: 96, owner: "Priya Nair" },
   { id: "c2", name: "Albion Logistics RAK", sector: "Logistics", emirate: "RAKEZ", licence: "RAKEZ 0412976", trn: "100 9934 1120 00003", tier: "corporate", founding: true, status: "Active", since: rel(-88), renews: rel(277), contacts: 7, quality: 91, owner: "Priya Nair" },
-  { id: "c3", name: "Marlow Hospitality Group", sector: "Hospitality", emirate: "RAK Mainland", licence: "RAK-DED 39102", trn: "100 4410 2287 00003", tier: "corporate", founding: true, status: "Active", since: rel(-81), renews: rel(284), contacts: 9, quality: 88, owner: "Eleanor Grant" },
+  { id: "c3", name: "Marlow Hospitality Group", sector: "Hospitality", emirate: "RAK Mainland", licence: "RAK-DED 39102", trn: "100 4410 2287 00003", tier: "corporate", founding: true, status: "Active", since: rel(-81), renews: rel(284), contacts: 9, quality: 88, owner: "Brooke Grant" },
   { id: "c4", name: "Kensington Legal Middle East", sector: "Legal", emirate: "RAK ICC", licence: "ICC 77120", trn: "100 6672 0091 00003", tier: "business", founding: true, status: "Active", since: rel(-70), renews: rel(295), contacts: 3, quality: 94, owner: "Priya Nair" },
   { id: "c5", name: "Northcote Advisory", sector: "Consulting", emirate: "RAKEZ", licence: "RAKEZ 0419934", trn: "100 1187 4420 00003", tier: "business", status: "Renewal due", since: rel(-340), renews: rel(18), contacts: 2, quality: 72, owner: "Priya Nair" },
   { id: "c6", name: "Pennine Education Partners", sector: "Education", emirate: "RAK Mainland", licence: "RAK-DED 51877", tier: "business", status: "Active", since: rel(-41), renews: rel(324), contacts: 3, quality: 83, owner: "Priya Nair" },
@@ -256,7 +256,7 @@ export const COMPANIES: Company[] = [
   { id: "c8", name: "Saltmarsh Design Studio", sector: "Creative", emirate: "RAK Mainland", licence: "RAK-DED 52201", tier: "individual", status: "Active", since: rel(-22), renews: rel(343), contacts: 1, quality: 64, owner: "Priya Nair" },
   { id: "c9", name: "Fenwick & Rahman Accountants", sector: "Accounting", emirate: "RAK Mainland", licence: "RAK-DED 30118", trn: "100 3329 7710 00003", tier: "business", founding: true, status: "Sponsor", since: rel(-90), renews: rel(275), contacts: 4, quality: 92, owner: "Omar Al Shehhi" },
   { id: "c10", name: "Hawthorn Recruitment", sector: "Recruitment", emirate: "RAKEZ", licence: "RAKEZ 0420051", tier: "business", status: "Renewal due", since: rel(-352), renews: rel(9), contacts: 2, quality: 58, owner: "Priya Nair" },
-  { id: "c11", name: "Clyde Marine Services", sector: "Maritime", emirate: "RAK Maritime City", licence: "RAKMC 2210", trn: "100 2290 6618 00003", tier: "corporate", status: "Active", since: rel(-55), renews: rel(310), contacts: 5, quality: 86, owner: "Eleanor Grant" },
+  { id: "c11", name: "Clyde Marine Services", sector: "Maritime", emirate: "RAK Maritime City", licence: "RAKMC 2210", trn: "100 2290 6618 00003", tier: "corporate", status: "Active", since: rel(-55), renews: rel(310), contacts: 5, quality: 86, owner: "Brooke Grant" },
   { id: "c12", name: "Ridgeway Insurance Brokers", sector: "Insurance", emirate: "RAK Mainland", licence: "RAK-DED 47710", tier: "business", status: "Lapsed", since: rel(-410), contacts: 2, quality: 49, owner: "Priya Nair" },
   { id: "c13", name: "Meridian Bank RAK", sector: "Banking", emirate: "RAK Mainland", licence: "CBUAE 1182", trn: "100 0042 1187 00003", tier: "corporate", founding: true, status: "Sponsor", since: rel(-95), renews: rel(270), contacts: 8, quality: 99, owner: "Omar Al Shehhi" },
   { id: "c14", name: "Ras Coast Hotels & Resorts", sector: "Hospitality", emirate: "RAK Mainland", licence: "RAK-DED 22019", trn: "100 5512 0098 00003", tier: "corporate", status: "Sponsor", since: rel(-60), renews: rel(305), contacts: 5, quality: 90, owner: "Omar Al Shehhi" },
@@ -292,12 +292,12 @@ export const PEOPLE: Person[] = [
 export const SPONSORS: Sponsor[] = [
   { id: "s1", name: "Meridian Bank RAK", level: "Platinum", amount: 150000, start: rel(-95), end: rel(270), rm: "Omar Al Shehhi", sector: "Banking", stage: "Active" },
   { id: "s2", name: "Ras Coast Hotels & Resorts", level: "Gold", amount: 75000, start: rel(-60), end: rel(305), rm: "Omar Al Shehhi", sector: "Hospitality", stage: "Active" },
-  { id: "s3", name: "Brightwater Energy", level: "Gold", amount: 75000, start: rel(-92), end: rel(273), rm: "Eleanor Grant", sector: "Energy", stage: "Active" },
+  { id: "s3", name: "Brightwater Energy", level: "Gold", amount: 75000, start: rel(-92), end: rel(273), rm: "Brooke Grant", sector: "Energy", stage: "Active" },
   { id: "s4", name: "Fenwick & Rahman Accountants", level: "Silver", amount: 35000, start: rel(-90), end: rel(275), rm: "Omar Al Shehhi", sector: "Accounting", stage: "Active" },
   { id: "s5", name: "Albion Logistics RAK", level: "Silver", amount: 35000, start: rel(-20), end: rel(345), rm: "Omar Al Shehhi", sector: "Logistics", stage: "Signed" },
-  { id: "s6", name: "Kensington Legal Middle East", level: "Partner", amount: 20000, start: rel(-70), end: rel(295), rm: "Eleanor Grant", sector: "Legal", stage: "Active" },
+  { id: "s6", name: "Kensington Legal Middle East", level: "Partner", amount: 20000, start: rel(-70), end: rel(295), rm: "Brooke Grant", sector: "Legal", stage: "Active" },
   { id: "s7", name: "Oakridge Capital", level: "Gold", amount: 75000, start: rel(30), end: rel(395), rm: "Omar Al Shehhi", sector: "Finance", stage: "Proposal" },
-  { id: "s8", name: "Clyde Marine Services", level: "Silver", amount: 35000, start: rel(14), end: rel(379), rm: "Eleanor Grant", sector: "Maritime", stage: "Renewal talks" },
+  { id: "s8", name: "Clyde Marine Services", level: "Silver", amount: 35000, start: rel(14), end: rel(379), rm: "Brooke Grant", sector: "Maritime", stage: "Renewal talks" },
 ];
 
 export const sponsorById = (id?: string) => SPONSORS.find((s) => s.id === id);
@@ -343,7 +343,7 @@ export const EVENTS: ChamberEvent[] = [
     sponsorId: "s1",
     art: "dusk",
     speakers: [
-      { name: "Eleanor Grant", role: "Executive Director, BCC RAK" },
+      { name: "Brooke Grant", role: "Executive Director, BCC RAK" },
       { name: "Hannah Marlow", role: "CEO, Marlow Hospitality Group" },
       { name: "James Okafor", role: "Head of Marketing, Meridian Bank RAK" },
     ],
@@ -757,7 +757,7 @@ export const HYGIENE_ISSUES = [
 /* ------------------------------------------------------------------ */
 
 export const POSTS: Post[] = [
-  { id: "po1", author: "Eleanor Grant", role: "Executive Director", time: rel(-1, 9, 12), title: "Launch evening: final details", body: "Thank you to everyone who has registered for the launch evening. Doors open at 19:00 at The Harbour Club. Valet parking is available, and the dress code is business formal. We look forward to seeing you there.", pinned: true, topic: "Announcement", reactions: 48, replies: 12 },
+  { id: "po1", author: "Brooke Grant", role: "Executive Director", time: rel(-1, 9, 12), title: "Launch evening: final details", body: "Thank you to everyone who has registered for the launch evening. Doors open at 19:00 at The Harbour Club. Valet parking is available, and the dress code is business formal. We look forward to seeing you there.", pinned: true, topic: "Announcement", reactions: 48, replies: 12 },
   { id: "po2", author: "Priya Nair", role: "Membership Manager", time: rel(-3, 14, 40), title: "Founding status closes at launch", body: "Applications received before the launch evening keep founding status for life. If you know a business that should be part of the Chamber from day one, now is the time to introduce them.", topic: "Announcement", reactions: 31, replies: 6 },
   { id: "po3", author: "Imran Rahman", role: "Fenwick & Rahman · Silver partner", time: rel(-5, 11, 5), title: "E-invoicing in 2027: what members need to do", body: "From July 2027 most B2B invoices in the UAE will need to go through an accredited provider. We’ve put together a one-page checklist for members — find it in the Insights section, or bring your questions to the practical briefing.", topic: "Policy", reactions: 27, replies: 9 },
   { id: "po4", author: "Tom Ashworth", role: "Albion Logistics RAK", time: rel(-6, 17, 22), title: "Looking for a warehouse partner in Al Ghail", body: "We’re expanding cold-chain capacity in the north of the emirate and would love to speak to any members with space or local contractors to recommend.", topic: "Community", reactions: 9, replies: 4 },
@@ -773,7 +773,7 @@ export const SPONSOR_THREAD: ThreadMessage[] = [
 export const NOTIFICATIONS = [
   { id: "n1", title: "Launch evening is in 9 days", body: "Your ticket is ready in My tickets.", time: rel(0, 8, 0), unread: true },
   { id: "n2", title: "Invoice BCC-2026-0214 is due", body: "AED 525.00 for festive evening guest tickets.", time: rel(-3, 9, 0), unread: true },
-  { id: "n3", title: "New post from Eleanor Grant", body: "Launch evening: final details", time: rel(-1, 9, 12), unread: false },
+  { id: "n3", title: "New post from Brooke Grant", body: "Launch evening: final details", time: rel(-1, 9, 12), unread: false },
 ];
 
 /* ------------------------------------------------------------------ */

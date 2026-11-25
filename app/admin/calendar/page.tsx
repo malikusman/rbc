@@ -62,7 +62,7 @@ export default function AdminCalendar() {
           <Card>
             <CardHeader title="Connected calendars" />
             <div className="space-y-2.5 px-6 pb-6 text-[13px]">
-              {["Eleanor Grant · Outlook", "Priya Nair · Outlook", "Omar Al Shehhi · Outlook", "Calendly · 2 event types"].map((c) => (
+              {["Brooke Grant · Outlook", "Priya Nair · Outlook", "Omar Al Shehhi · Outlook", "Calendly · 2 event types"].map((c) => (
                 <div key={c} className="flex items-center justify-between">
                   <span className="text-navy">{c}</span>
                   <Badge tone="ok" dot>

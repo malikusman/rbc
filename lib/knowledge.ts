@@ -89,7 +89,7 @@ export const SEED_DOCS: KnowledgeDoc[] = [
     size: "96 KB",
     pages: 5,
     uploaded: rel(-30, 18, 0),
-    uploadedBy: "Eleanor Grant",
+    uploadedBy: "Brooke Grant",
     status: "Indexed",
     progress: 100,
     summary: "Board approved the launch evening budget, agreed founding status closes at launch, and asked for an e-invoicing provider decision by January.",

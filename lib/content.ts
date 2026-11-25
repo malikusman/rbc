@@ -21,7 +21,7 @@ export const ARTICLES: Article[] = [
     photo: "networking",
     art: "dusk",
     minutes: 3,
-    author: "Eleanor Grant",
+    author: "Brooke Grant",
     body: [
       { p: "Ras Al Khaimah has a growing British community, but until now no dedicated place for British businesses to meet, share what works and speak with one voice. The Chamber exists to change that." },
       { h: "What we’ll do", p: "We’ll run a regular programme of breakfasts, briefings and evenings; represent members’ interests with the emirate’s authorities; and offer practical help to companies setting up or growing here." },
