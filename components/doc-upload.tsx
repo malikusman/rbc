@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, FileText, Loader2, UploadCloud } from "lucide-react";
-import { LanaMark, LANA_GRADIENT } from "./lana";
+import { LanaMark, LanaTile, LANA_GRADIENT } from "./lana";
 import { useStore } from "@/lib/store";
 import type { KnowledgeDoc } from "@/lib/knowledge";
 import { cn, relLabel } from "@/lib/utils";
@@ -46,7 +46,7 @@ export function DocUpload({ owner, by, hint, compact }: { owner: KnowledgeDoc["o
           <div className="text-[14px] font-medium text-navy">Drop a file or click to upload</div>
           <div className="text-[12px] text-faint">{hint}</div>
         </div>
-        <LanaMark size={22} />
+        <LanaTile size={36} />
         <input ref={input} type="file" multiple className="hidden" onChange={(e) => ingest(e.target.files)} />
       </div>
       <ul className="mt-3 space-y-2">

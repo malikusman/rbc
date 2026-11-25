@@ -229,7 +229,7 @@ function Sidebar({ portal, onNavigate }: { portal: Portal; onNavigate?: () => vo
                         />
                       )}
                       {active && <span className="absolute top-2 bottom-2 left-0 w-[3px] rounded-full bg-red" />}
-                      {it.lana ? <LanaMark size={18} className="relative z-10 mx-[-1px]" /> : <Icon size={16} strokeWidth={active ? 2 : 1.6} className="relative z-10 shrink-0" />}
+                      {it.lana ? <LanaMark size={22} className="relative z-10 mx-[-2px] !self-center" /> : <Icon size={16} strokeWidth={active ? 2 : 1.6} className="relative z-10 shrink-0" />}
                       <span className="relative z-10 flex-1 truncate">{it.label}</span>
                       {it.lana && !active && <LanaPill className="relative z-10 !px-1.5">AI</LanaPill>}
                       {badge && (
@@ -566,7 +566,7 @@ function TopLanaButton() {
   const setOpen = useLanaUI((s) => s.setOpen);
   return (
     <button onClick={() => setOpen(true)} className="hidden h-9 items-center gap-2 rounded-xl border border-hair bg-white px-3 text-[13px] font-medium text-navy shadow-[var(--shadow-card)] transition hover:border-[#8A7BE8] md:inline-flex">
-      <LanaMark size={18} /> Ask Lana
+      <LanaMark size={22} className="!self-center" /> Ask Lana
       <span className="hidden items-center gap-0.5 lg:flex">
         <Kbd>⌘</Kbd>
         <Kbd>J</Kbd>

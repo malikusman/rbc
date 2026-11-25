@@ -20,6 +20,19 @@ export function LanaMark({ size = 28, className }: { size?: number; className?: 
   return <Image src="/lana.png" alt="" width={w} height={size} style={{ width: w, height: size }} className={cn("shrink-0 self-start select-none", className)} aria-hidden />;
 }
 
+/** The Lana mark on a clean white tile — the default way to show Lana. */
+export function LanaTile({ size = 40, className, ring = true }: { size?: number; className?: string; ring?: boolean }) {
+  return (
+    <span
+      className={cn("relative inline-flex shrink-0 items-center justify-center bg-white", ring && "border border-hair shadow-[0_1px_2px_rgba(15,23,42,0.06)]", className)}
+      style={{ width: size, height: size, borderRadius: Math.round(size * 0.3) }}
+      aria-hidden
+    >
+      <LanaMark size={Math.round(size * 0.72)} className="!self-center" />
+    </span>
+  );
+}
+
 export function LanaSparkle({ size = 12, className }: { size?: number; className?: string }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} className={className} aria-hidden>
@@ -175,7 +188,7 @@ export function LanaChat({ ctx, variant = "panel", initialPrompt, onClose }: { c
       {!page && (
         <div className="relative flex items-center gap-3 border-b border-hair px-5 py-3.5">
           <span className="absolute inset-x-0 top-0 h-[3px]" style={{ background: LANA_GRADIENT }} />
-          <LanaMark size={30} />
+          <LanaTile size={44} />
           <div className="flex-1">
             <div className="text-[15px] font-semibold text-navy">Lana</div>
             <div className="flex items-center gap-1.5 text-[11.5px] text-muted">
@@ -224,7 +237,7 @@ export function LanaChat({ ctx, variant = "panel", initialPrompt, onClose }: { c
                 </motion.div>
               ) : (
                 <motion.div key={m.id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
-                  <LanaMark size={24} className="mt-0.5" />
+                  <LanaTile size={34} className="mt-[-2px]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-[14.5px] leading-relaxed text-navy">
                       {m.text.slice(0, m.shown)}
@@ -262,7 +275,7 @@ export function LanaChat({ ctx, variant = "panel", initialPrompt, onClose }: { c
             )}
             {thinking && (
               <div className="flex items-center gap-3">
-                <LanaMark size={24} />
+                <LanaTile size={34} />
                 <div className="flex gap-1">
                   {[0, 1, 2].map((i) => (
                     <motion.span key={i} className="h-2 w-2 rounded-full" style={{ background: ["#27D7F4", "#8A7BE8", "#E52BDC"][i] }} animate={{ y: [0, -4, 0], opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }} />
@@ -366,9 +379,9 @@ function Wave() {
 export function LanaOrb({ size = 96 }: { size?: number }) {
   return (
     <div className="relative mx-auto" style={{ width: size, height: size }}>
-      <motion.div className="absolute inset-0 rounded-full blur-2xl" style={{ background: LANA_GRADIENT, opacity: 0.35 }} animate={{ scale: [1, 1.15, 1] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} />
-      <div className="relative flex h-full w-full items-center justify-center rounded-full border border-white bg-white/80 shadow-[var(--shadow-lift)] backdrop-blur">
-        <LanaMark size={size * 0.5} />
+      <motion.div className="absolute inset-0 rounded-full blur-2xl" style={{ background: LANA_GRADIENT, opacity: 0.14 }} animate={{ scale: [1, 1.15, 1] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} />
+      <div className="relative flex h-full w-full items-center justify-center rounded-full border border-hair bg-white shadow-[var(--shadow-lift)]">
+        <LanaMark size={Math.round(size * 0.64)} className="!self-center" />
       </div>
     </div>
   );
@@ -548,13 +561,13 @@ export function LanaLauncher({ ctx, nudge, className }: { ctx: LanaContext; nudg
                 dismissBubble();
                 setOpen(true);
               }}
-              className="group relative flex h-14 items-center gap-2.5 rounded-full bg-white py-2 pr-5 pl-3 shadow-[var(--shadow-lift)] transition hover:shadow-[var(--shadow-pop)]"
+              className="group relative flex h-16 items-center gap-2.5 rounded-full bg-white py-2 pr-6 pl-3 shadow-[var(--shadow-lift)] transition hover:shadow-[var(--shadow-pop)]"
               aria-label="Ask Lana"
             >
               <span className="absolute -inset-[1.5px] -z-10 rounded-full" style={{ background: LANA_GRADIENT } as CSSProperties} />
               <span className="absolute inset-0 rounded-full bg-white" />
-              <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-paper">
-                <LanaMark size={24} />
+              <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white">
+                <LanaMark size={34} className="!self-center" />
               </span>
               <span className="relative text-[14px] font-semibold text-navy">Ask Lana</span>
             </button>
@@ -569,9 +582,9 @@ export function LanaLauncher({ ctx, nudge, className }: { ctx: LanaContext; nudg
 export function LanaHeaderButton() {
   const setOpen = useLanaUI((s) => s.setOpen);
   return (
-    <button onClick={() => setOpen(true)} aria-label="Ask Lana" className="group relative flex h-11 items-center gap-2 rounded-xl px-2 transition hover:bg-stone/60">
-      <LanaMark size={30} />
-      <LanaPill className="hidden xl:inline-flex">Ask Lana</LanaPill>
+    <button onClick={() => setOpen(true)} aria-label="Ask Lana" className="group relative flex h-12 items-center gap-2.5 rounded-2xl border border-hair bg-white pr-2 pl-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.05)] transition hover:border-[#8A7BE8] xl:pr-4">
+      <LanaTile size={38} ring={false} />
+      <span className="hidden text-[14px] font-semibold text-navy xl:inline">Ask Lana</span>
     </button>
   );
 }

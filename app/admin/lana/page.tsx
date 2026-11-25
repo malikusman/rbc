@@ -29,9 +29,9 @@ export default function AskLanaPage() {
     <div>
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="flex items-center gap-4">
-          <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-[var(--shadow-card)]">
+          <span className="relative inline-flex h-[72px] w-[72px] items-center justify-center rounded-[22px] border border-hair bg-white shadow-[var(--shadow-card)]">
             <span className="absolute inset-x-2 -bottom-px h-[2px] rounded-full" style={{ background: LANA_GRADIENT }} />
-            <LanaMark size={34} />
+            <LanaMark size={52} className="!self-center" />
           </span>
           <div>
             <h1 className="font-display text-[36px] leading-tight text-navy md:text-[40px]">Ask Lana</h1>
